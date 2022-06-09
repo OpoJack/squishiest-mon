@@ -38,8 +38,21 @@ const PokemonListing: React.FC<{ pokemon: PokemonQueryResult[number] }> = ({
   return (
     <div className='flex border-b p-2 items-center justify-between'>
       <div className='flex items-center'>
-        <Image src={pokemon.spriteUrl} width={64} height={64} layout='fixed' />
+        <Image
+          alt={pokemon.name}
+          src={pokemon.spriteUrl}
+          width={64}
+          height={64}
+        />
         <div className='capitalize'>{pokemon.name}</div>
+      </div>
+      <div>
+        <span>
+          Total: {pokemon._count.VoteAgainst + pokemon._count.VoteFor}
+        </span>
+        <p>
+          ✅: {pokemon._count.VoteFor} | ❌: {pokemon._count.VoteAgainst}
+        </p>
       </div>
       <div className='pr-4'>
         {generateCountPercent(pokemon).toFixed(2) + "%"}
