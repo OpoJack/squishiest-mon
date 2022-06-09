@@ -9,7 +9,7 @@ import Link from "next/link";
 import Head from "next/head";
 
 const btn =
-  "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500";
+  "inline-flex items-center px-2.5 py-1.5 border-black-500 shadow-sm text-md font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-xl";
 
 export default function Home() {
   const [ids, updateIds] = useState(getOptionsForVote());
@@ -46,12 +46,12 @@ export default function Home() {
         Which Pokémon is Squishier?
       </div>
       {dataLoaded && (
-        <div className='border rounded p-8 flex justify-between items-center max-w-2xl'>
+        <div className='md:p-8 sm: p-2 flex justify-between items-center max-w-2xl flex-col md:flex-row'>
           <PokemonListing
             pokemon={firstPokemon.data}
             vote={() => voteForSquishy(first)}
           />
-          <div className='p-8'>Vs</div>
+          <div className='md:p-8 sm:p-3'>Vs</div>
           <PokemonListing
             pokemon={secondPokemon.data}
             vote={() => voteForSquishy(second)}
@@ -79,6 +79,9 @@ const PokemonListing: React.FC<{
 }> = (props) => {
   return (
     <div className='flex flex-col items-center'>
+      <div className='text-xl text-center capitalize -mt-8'>
+        {props.pokemon.name}
+      </div>
       <Image
         src={props.pokemon.spriteUrl}
         width={256}
@@ -87,9 +90,7 @@ const PokemonListing: React.FC<{
         alt={props.pokemon.name}
         className=''
       />
-      <div className='text-xl text-center capitalize -mt-8'>
-        {props.pokemon.name}
-      </div>
+
       <button className={btn} onClick={() => props.vote()}>
         Squishy
       </button>

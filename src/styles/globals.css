@@ -5,4 +5,5 @@
 
 body {
   @apply text-white bg-gray-800;
+  /* font-family: "Press Start 2P", cursive; */
 }

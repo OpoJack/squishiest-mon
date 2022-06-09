@@ -38,7 +38,7 @@ const PokemonListing: React.FC<{ pokemon: PokemonQueryResult[number] }> = ({
 }) => {
   return (
     <div className='flex border-b p-2 items-center justify-between'>
-      <div className='flex items-center'>
+      <div className='flex items-center  w-1/5'>
         <Image
           alt={pokemon.name}
           src={pokemon.spriteUrl}
@@ -47,7 +47,7 @@ const PokemonListing: React.FC<{ pokemon: PokemonQueryResult[number] }> = ({
         />
         <div className='capitalize'>{pokemon.name}</div>
       </div>
-      <div>
+      <div className='text-center text-sm'>
         <span>
           Total: {pokemon._count.VoteAgainst + pokemon._count.VoteFor}
         </span>
