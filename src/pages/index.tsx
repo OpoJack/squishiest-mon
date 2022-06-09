@@ -6,6 +6,7 @@ import { inferQueryResponse } from "./api/trpc/[trpc]";
 
 import Image from "next/image";
 import Link from "next/link";
+
 const btn =
   "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500";
 
@@ -29,30 +30,33 @@ export default function Home() {
     updateIds(getOptionsForVote());
   };
 
+  const dataLoaded =
+    !firstPokemon.isLoading &&
+    firstPokemon.data &&
+    !secondPokemon.isLoading &&
+    secondPokemon.data;
+
   return (
-    <div className='h-screen w-screen flex flex-col justify-center items-center relative'>
-      <div className='text-2xl text-center'>Which Pokémon is Squishier?</div>
-      <div className='p-2' />
-      <div className='border rounded p-8 flex justify-between items-center max-w-2xl'>
-        {!firstPokemon.isLoading &&
-          firstPokemon.data &&
-          !secondPokemon.isLoading &&
-          secondPokemon.data && (
-            <>
-              <PokemonListing
-                pokemon={firstPokemon.data}
-                vote={() => voteForSquishy(first)}
-              />
-              <div className='p-8'>Vs</div>
-              <PokemonListing
-                pokemon={secondPokemon.data}
-                vote={() => voteForSquishy(second)}
-              />
-            </>
-          )}
-        <div className='p-2' />
+    <div className='h-screen w-screen flex flex-col justify-between items-center relative'>
+      <div className='text-2xl text-center pt-8'>
+        Which Pokémon is Squishier?
       </div>
-      <div className='absolute bottom-0 w-full text-xl text-center pb-2'>
+      {dataLoaded && (
+        <div className='border rounded p-8 flex justify-between items-center max-w-2xl'>
+          <PokemonListing
+            pokemon={firstPokemon.data}
+            vote={() => voteForSquishy(first)}
+          />
+          <div className='p-8'>Vs</div>
+          <PokemonListing
+            pokemon={secondPokemon.data}
+            vote={() => voteForSquishy(second)}
+          />
+          <div className='p-2' />
+        </div>
+      )}
+      {!dataLoaded && <img src='/rings.svg' />}
+      <div className='w-full text-xl text-center pb-2'>
         <a href='https://github.com/OpoJack/squishiest-mon'>Github</a>
         {" | "}
         <Link href='/results'>
