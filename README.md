@@ -2,7 +2,7 @@
 
 Only you can decide
 
-Thanks to [@TheoBr](https://github.com/TheoBr "Github - TheoBr") for the tutorial and inspiration.
+Thanks to [@TheoBr](https://github.com/TheoBr "Github - TheoBr") for the guidance and inspiration.
 
 ## Getting Started
 
