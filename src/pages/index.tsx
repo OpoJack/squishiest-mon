@@ -73,6 +73,7 @@ const PokemonListing: React.FC<{
         height={256}
         layout='fixed'
         alt={props.pokemon.name}
+        className=''
       />
       <div className='text-xl text-center capitalize -mt-8'>
         {props.pokemon.name}
