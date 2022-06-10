@@ -4,6 +4,6 @@
 @tailwind utilities;
 
 body {
-  @apply text-white bg-gray-800;
-  /* font-family: "Press Start 2P", cursive; */
+  @apply text-gray-200 bg-gray-800;
+  /* font-family:"Press Start 2P", cursive; */
 }

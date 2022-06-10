@@ -51,7 +51,7 @@ export default function Home() {
             pokemon={firstPokemon.data}
             vote={() => voteForSquishy(first)}
           />
-          <div className='md:p-8 sm:p-3'>Vs</div>
+          <div className='md:p-8 sm:p-3 italic text-xl'>Vs</div>
           <PokemonListing
             pokemon={secondPokemon.data}
             vote={() => voteForSquishy(second)}
@@ -62,7 +62,7 @@ export default function Home() {
       {!dataLoaded && <img src='/rings.svg' />}
       <div className='w-full text-xl text-center pb-2'>
         <a href='https://github.com/OpoJack/squishiest-mon'>Github</a>
-        {" | "}
+        <span className=' inline-block p-4'>{"-"}</span>
         <Link href='/results'>
           <a>Results</a>
         </Link>
@@ -90,7 +90,6 @@ const PokemonListing: React.FC<{
         alt={props.pokemon.name}
         className=''
       />
-
       <button className={btn} onClick={() => props.vote()}>
         Squishy
       </button>
