@@ -2,7 +2,7 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
   render() {
-    const description = "Who's the squishiest of them all? Cast your vote?";
+    const description = "Who's the squishiest of them all? Cast your vote";
     const title = "Squishy Pokémon";
     return (
       <Html>
