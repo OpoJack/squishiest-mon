@@ -4,6 +4,7 @@ import { AsyncReturnType } from "@/utils/ts-bs";
 
 import Image from "next/image";
 import Head from "next/head";
+import Link from "next/link";
 
 const getPokemonInOrder = async () => {
   return await prisma.pokemon.findMany({
@@ -62,7 +63,7 @@ const PokemonListing: React.FC<{
           </p>
         </div>
       </div>
-      <div className='absolute top-0 left-0 z-20 flex items-center justify-center px-2 font-semibold text-white bg-gray-600 border border-gray-500 shadow-lg rounded-br-md'>
+      <div className='absolute top-0 left-0 z-20 flex items-center justify-center px-2 font-semibold text-white bg-slate-700 border border-slate-600 shadow-lg rounded-br-md'>
         {rank}
       </div>
     </div>
@@ -77,7 +78,10 @@ const ResultsPage: React.FC<{
       <Head>
         <title>Roundest Pokemon Results</title>
       </Head>
-      <h2 className='text-2xl p-4'>Results</h2>
+      <div className='text-center'>
+        <h2 className='text-2xl p-2'>Results</h2>
+        <Link href={"/"}>Go back</Link>
+      </div>
       <div className='flex flex-col w-full max-w-2xl border'>
         {props.pokemon
           .sort((a, b) => {
