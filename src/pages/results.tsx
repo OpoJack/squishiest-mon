@@ -48,6 +48,7 @@ const PokemonListing: React.FC<{
             width={64}
             height={64}
             layout='fixed'
+            alt={pokemon.name}
           />
           <div className='pl-2 capitalize'>{pokemon.name}</div>
         </div>

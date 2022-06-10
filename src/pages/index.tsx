@@ -37,6 +37,7 @@ export default function Home() {
     !secondPokemon.isLoading &&
     secondPokemon.data;
 
+  console.log(`https://${process.env.DATABASE_URL}`);
   return (
     <div className='h-screen w-screen flex flex-col justify-between items-center relative'>
       <Head>
@@ -46,7 +47,7 @@ export default function Home() {
         Which Pokémon is Squishier?
       </div>
       {dataLoaded && (
-        <div className='p-8 flex justify-between items-center max-w-2xl flex-col md:flex-row animate-fade-in'>
+        <div className='md:p-8 sm:p-2 flex justify-between items-center max-w-2xl flex-col md:flex-row animate-fade-in'>
           <PokemonListing
             pokemon={firstPokemon.data}
             vote={() => voteForSquishy(first)}

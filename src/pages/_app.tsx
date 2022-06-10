@@ -15,7 +15,7 @@ function getBaseUrl() {
 
   // return `http://localhost:${process.env.PORT ?? 3000}`; // dev SSR should use localhost
 
-  return `https://${process.env.VERCEL_URL}`;
+  return `https://${process.env.DATABASE_URL}`;
 }
 
 export default withTRPC<AppRouter>({
