@@ -9,7 +9,7 @@ import Link from "next/link";
 import Head from "next/head";
 
 const btn =
-  "inline-flex items-center px-2.5 py-1.5 border-black-500 shadow-sm text-md font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-xl";
+  "inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm font-medium rounded-full text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500";
 
 export default function Home() {
   const [ids, updateIds] = useState(getOptionsForVote());
@@ -46,7 +46,7 @@ export default function Home() {
         Which Pokémon is Squishier?
       </div>
       {dataLoaded && (
-        <div className='md:p-8 sm: p-2 flex justify-between items-center max-w-2xl flex-col md:flex-row'>
+        <div className='md:p-8 sm: p-2 flex justify-between items-center max-w-2xl flex-col md:flex-row animate-fade-in'>
           <PokemonListing
             pokemon={firstPokemon.data}
             vote={() => voteForSquishy(first)}
@@ -88,7 +88,7 @@ const PokemonListing: React.FC<{
         height={256}
         layout='fixed'
         alt={props.pokemon.name}
-        className=''
+        className='animate-fade-in'
       />
       <button className={btn} onClick={() => props.vote()}>
         Squishy
