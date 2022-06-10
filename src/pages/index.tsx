@@ -46,7 +46,7 @@ export default function Home() {
         Which Pokémon is Squishier?
       </div>
       {dataLoaded && (
-        <div className='md:p-8 sm: p-2 flex justify-between items-center max-w-2xl flex-col md:flex-row animate-fade-in'>
+        <div className='p-8 flex justify-between items-center max-w-2xl flex-col md:flex-row animate-fade-in'>
           <PokemonListing
             pokemon={firstPokemon.data}
             vote={() => voteForSquishy(first)}
@@ -82,7 +82,7 @@ const PokemonListing: React.FC<{
       className='flex flex-col items-center transition-opacity'
       key={props.pokemon.id}
     >
-      <div className='text-xl text-center capitalize -mt-8'>
+      <div className='text-xl text-center capitalize mt-[0.5rem]'>
         {props.pokemon.name}
       </div>
       <Image
