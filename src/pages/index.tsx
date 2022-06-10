@@ -78,7 +78,10 @@ const PokemonListing: React.FC<{
   vote: () => void;
 }> = (props) => {
   return (
-    <div className='flex flex-col items-center'>
+    <div
+      className='flex flex-col items-center transition-opacity'
+      key={props.pokemon.id}
+    >
       <div className='text-xl text-center capitalize -mt-8'>
         {props.pokemon.name}
       </div>

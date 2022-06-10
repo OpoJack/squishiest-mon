@@ -1,6 +1,7 @@
 import type { GetServerSideProps } from "next";
 import { prisma } from "@/backend/utils/prisma";
-import { AsyncReturnType } from "../utils/ts-bs";
+import { AsyncReturnType } from "@/utils/ts-bs";
+
 import Image from "next/image";
 import Head from "next/head";
 
@@ -33,30 +34,36 @@ const generateCountPercent = (pokemon: PokemonQueryResult[number]) => {
   return (VoteFor / (VoteFor + VoteAgainst)) * 100;
 };
 
-const PokemonListing: React.FC<{ pokemon: PokemonQueryResult[number] }> = ({
-  pokemon,
-}) => {
+const PokemonListing: React.FC<{
+  pokemon: PokemonQueryResult[number];
+  rank: number;
+}> = ({ pokemon, rank }) => {
   return (
-    <div className='flex border-b p-2 items-center justify-between'>
-      <div className='flex items-center  w-1/5'>
-        <Image
-          alt={pokemon.name}
-          src={pokemon.spriteUrl}
-          width={64}
-          height={64}
-        />
-        <div className='capitalize'>{pokemon.name}</div>
+    <div className='relative flex border-b p-2 items-center justify-between'>
+      <div className='flex items-center'>
+        <div className='flex items-center pl-4'>
+          <Image
+            src={pokemon.spriteUrl}
+            width={64}
+            height={64}
+            layout='fixed'
+          />
+          <div className='pl-2 capitalize'>{pokemon.name}</div>
+        </div>
       </div>
-      <div className='text-center text-sm'>
-        <span>
-          Total: {pokemon._count.VoteAgainst + pokemon._count.VoteFor}
-        </span>
-        <p>
-          ✅: {pokemon._count.VoteFor} | ❌: {pokemon._count.VoteAgainst}
-        </p>
-      </div>
-      <div className='pr-4'>
+      <div className='pr-4 text-center text-lg'>
         {generateCountPercent(pokemon).toFixed(2) + "%"}
+        <div className=' text-xs'>
+          <span>
+            Total: {pokemon._count.VoteAgainst + pokemon._count.VoteFor}
+          </span>
+          <p>
+            ✅: {pokemon._count.VoteFor} | ❌: {pokemon._count.VoteAgainst}
+          </p>
+        </div>
+      </div>
+      <div className='absolute top-0 left-0 z-20 flex items-center justify-center px-2 font-semibold text-white bg-gray-600 border border-gray-500 shadow-lg rounded-br-md'>
+        {rank}
       </div>
     </div>
   );
@@ -68,14 +75,29 @@ const ResultsPage: React.FC<{
   return (
     <div className='flex flex-col items-center'>
       <Head>
-        <title>Squishiest Pokemon Results</title>
+        <title>Roundest Pokemon Results</title>
       </Head>
       <h2 className='text-2xl p-4'>Results</h2>
       <div className='flex flex-col w-full max-w-2xl border'>
         {props.pokemon
-          .sort((a, b) => generateCountPercent(b) - generateCountPercent(a))
+          .sort((a, b) => {
+            const difference =
+              generateCountPercent(b) - generateCountPercent(a);
+
+            if (difference === 0) {
+              return b._count.VoteFor - a._count.VoteFor;
+            }
+
+            return difference;
+          })
           .map((currentPokemon, index) => {
-            return <PokemonListing pokemon={currentPokemon} key={index} />;
+            return (
+              <PokemonListing
+                pokemon={currentPokemon}
+                key={index}
+                rank={index + 1}
+              />
+            );
           })}
       </div>
     </div>
@@ -86,5 +108,6 @@ export default ResultsPage;
 
 export const getStaticProps: GetServerSideProps = async () => {
   const pokemonOrdered = await getPokemonInOrder();
-  return { props: { pokemon: pokemonOrdered }, revalidate: 60 };
+  const DAY_IN_SECONDS = 60 * 60 * 24;
+  return { props: { pokemon: pokemonOrdered }, revalidate: DAY_IN_SECONDS };
 };
