@@ -51,7 +51,7 @@ export default function Home() {
             pokemon={firstPokemon.data}
             vote={() => voteForSquishy(first)}
           />
-          <div className='md:p-8 sm:p-3 italic text-xl'>Vs</div>
+          <div className='md:p-8 sm:p-5 italic text-xl'>Vs</div>
           <PokemonListing
             pokemon={secondPokemon.data}
             vote={() => voteForSquishy(second)}
