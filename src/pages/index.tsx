@@ -37,7 +37,6 @@ export default function Home() {
     !secondPokemon.isLoading &&
     secondPokemon.data;
 
-  console.log(`https://${process.env.DATABASE_URL}`);
   return (
     <div className='h-screen w-screen flex flex-col justify-between items-center relative'>
       <Head>
@@ -60,7 +59,9 @@ export default function Home() {
           <div className='p-2' />
         </div>
       )}
-      {!dataLoaded && <img src='/rings.svg' />}
+      {!dataLoaded && (
+        <Image alt='Loading...' src='/rings.svg' width={45} height={45} />
+      )}
       <div className='w-full text-xl text-center pb-2'>
         <a href='https://github.com/OpoJack/squishiest-mon'>Github</a>
         <span className=' inline-block p-4'>{"-"}</span>
